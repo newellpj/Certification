@@ -150,7 +150,7 @@ public class ReviewController {
 		
 		if(bookID == -1){
 			System.out.println("BOOK != -1");
-			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
+			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText")).get(0);
 			bookID = book.getIdbooks();
 		}
 		
@@ -266,9 +266,9 @@ public class ReviewController {
 		
 		List<Books> booksList = new ArrayList<Books>();
 		
-		if(titleText != null && !"".equals(titleText) && !"".equals(authorText) && authorText != null){
-			Books book = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
-			booksList.add(book);
+		if((titleText != null && !"".equals(titleText)) || (!"".equals(authorText) && authorText != null)){
+			List<Books> books = booksService.searchBooksByTitleAndOrAuthor(request.getParameter("titleText"), request.getParameter("authorText"));
+			booksList.addAll(books);
 		}else if(publisherText != null && !"".equals(publisherText)){
 			System.out.println("in here222");
 			booksList.addAll(booksService.findBooksByPublisherLazyLoad(publisherText, 0, 20));

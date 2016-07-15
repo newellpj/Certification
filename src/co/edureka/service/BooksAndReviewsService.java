@@ -26,7 +26,7 @@ public class BooksAndReviewsService {
 	 * @param author
 	 * @return
 	 */
-	public Books searchBooksByTitleAndOrAuthor(String title, String author){
+	public List<Books> searchBooksByTitleAndOrAuthor(String title, String author){
 		return booksBO.findBooksByTitleAndAuthor(title, author);
 	}
 	

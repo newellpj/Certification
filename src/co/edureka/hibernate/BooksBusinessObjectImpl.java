@@ -47,15 +47,17 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 	}
 
 	@Override
-	public Books findBooksByTitleAndAuthor(String title, String author) {
+	public List<Books> findBooksByTitleAndAuthor(String title, String author) {
 		// TODO Auto-generated method stub
 		System.out.println("book title to search : "+title);
 		Session session = this.getSessionFactory().openSession();
-		List list = null;
+		List<Books> list = null;
 		
 		
 		if(author == null || "".equals(author)){
 			list = session.createQuery(" from "+Books.class.getName()+" where UPPER(title) = UPPER(:title) ").setString("title", title).list();
+		}else if(title == null || "".equals(title)){
+			list = session.createQuery(" from "+Books.class.getName()+" where UPPER(author) = UPPER(:author) ").setString("author", author).list();
 		}else{
 			Map hashMap = new HashMap();
 			hashMap.put("title", title);
@@ -65,11 +67,15 @@ public class BooksBusinessObjectImpl extends HibernateDaoSupport implements Book
 		}
 
 		if(list != null && list.size() > 0){
-			Object obj = list.get(0);
-			Books books = (Books)obj;
-//			session.flush();
+			
 			session.close();
-			return books;
+			return list;
+			
+//			Object obj = list.get(0);
+//			Books books = (Books)obj;
+//			session.flush();
+//			session.close();
+//			return books;
 		}else{
 		//	session.flush();
 			session.close();
