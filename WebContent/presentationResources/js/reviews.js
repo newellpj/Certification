@@ -496,7 +496,13 @@ function resetSearchPage(){
 					
 					$('.bookRevList').append("<div>");
 					$('.bookRevList').append(bookReviewsModel['booksList'][i]);
-					$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook'> Review this");				
+					
+					var bookDetails = bookReviewsModel['booksList'][i]
+					
+					bookDetails = encodeURI(bookDetails);//bookDetails.replace(/ /g, "-");
+					
+					
+					$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook?titleAuthorText="+bookDetails+"'"+"> Review this");				
 					$('.bookRevList').append("</a>");
 					$('.bookRevList').append("</div>");
 				}

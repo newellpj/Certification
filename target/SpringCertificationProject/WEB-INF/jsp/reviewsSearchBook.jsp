@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/bootstrap-custom.css">
 <link rel="stylesheet" type="text/css" href="./presentationResources/css/myStyles.css">
-<link rel="stylesheet" type="text/css" href="./presentationResources/css/font-awesome.css">
+
 
 <script type="text/javascript" src="./presentationResources/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="./presentationResources/js/jquery-ui.js"></script>
@@ -110,24 +110,28 @@ var html = $(".bookRevList").html();
 								<td><select style="visibility:hidden;" id="languageSelect"></select></td>
 							</tr>
 							<tr>
-								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();"  value="Search.." > 
-								<span class="glyphicon glyphicon-eye-open" ></span>Search...
+								<td colspan='1'></td><td> <button id="searchBook" name="searchBook" type="button" onclick="performAjaxSearch();" style="width: 110px; height: 42px;" value="Search.." > 
+								<span class="glyphicon glyphicon-eye-open" style="padding-right:5px;" ></span>Search...
 								</button>
-								<button id="resetSearch" class="resetSearch" name="resetSearch" type="button" onclick="resetSearches();"  value="Reset" >
-										<span class="glyphicon glyphicon-erase"  ></span>Reset
+								<button id="resetSearch" class="resetSearch" style="width: 110px; height: 42px;" name="resetSearch" type="button" onclick="resetSearchPage();"  value="Reset" >
+										<span class="glyphicon glyphicon-erase" style="padding-right:5px;" ></span>Reset
 								</button>
 								</td>
-								
+									
+	
 							</tr>
 						</table>
 					</div>		
 			<br/>
 			
-			<div id="search" class="search" style="display:none;">
-					<ul id="bookRevList" class="bookRevList" >				
-					</ul>
-			</div>
+		
 		</form:form>
+		
+			<div id="search" class="search" style="display:none;">
+					<div id="bookRevList" class="bookRevList" >				
+					</div>
+			</div>
+		
 	</div>
 
 <div style="margin-left:300px;" >
