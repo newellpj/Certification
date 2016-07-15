@@ -4,7 +4,7 @@ function jscroller(){
      loadingHtml: "<div class='ajax-loader-2 help-inline pull-right'> Loading...'</div>",
      padding: 20,
      nextSelector: 'a.jscroll-next:last',
-     contentSelector: 'li'
+     contentSelector: 'div'
  });
 }
 
@@ -210,23 +210,20 @@ function renderTagList(obj){
 			   $('#'+ID+'Select').append( new Option(el.text,el.value) );
 		});			
 			
-		 document.getElementById(ID+'Select').style.visibility = 'visible';
+		document.getElementById(ID+'Select').style.visibility = 'visible';
 		document.getElementById(ID+'Select').style.display = 'inline';
 							 
 	}else{
 		document.getElementById(ID+'Select').style.display = 'none';
-		 document.getElementById(ID+'Select').style.visibility = 'hidden';
+		document.getElementById(ID+'Select').style.visibility = 'hidden';
 	}
-	
-	
-	
+
 }
 
 
 
   function performAjaxAddReview(){
-	
-	 
+
 	 	 var dlg = $("<div></div>").dialog({
 			hide: 'fade',
 			maxWidth: 300,
@@ -397,15 +394,24 @@ function renderTagList(obj){
 		
  }
  
+ 
+function resetSearchPage(){
+	var iframe = parent.document.getElementById('theI_Frame');
+	iframe.src = iframe.src;
+}
+ 
  function resetSearches(){
+	 //redundant for now - the refresh of the iframe is a cleaner way for time being 
+	 //$('.bookRevList').html("");
 	 
-	 $('.bookRevList').html("");
-	 
-	 document.getElementById("search").style.display = "none";
+
 	  $("select").hide();
 	//document.getElementById(ID+'Select').style.visibility = 'hidden';
 	
+	
 	$('#reviewsForm').trigger("reset");
+	
+	
 	 
 	 $.ajax({
 			url: 'resetSearch',
@@ -421,7 +427,7 @@ function renderTagList(obj){
 			processData: true,
 			contentType: 'application/json; charset=utf-8',
 			type: 'GET',
-			success:  function() {
+			success:  function(bookReviewsModel) {
 			  
 				// window.location.href = 'reviewsSearchBook';
 				 
@@ -484,9 +490,15 @@ function renderTagList(obj){
 			    //$('#'+ID+'Select').append( new Option(el.text,el.value) );
 			    
 				document.getElementById("search").style.display = "inline";
+		
 				
 				for(var i = 0; i < bookReviewsModel['booksList'].length ;i++){
-					$('.bookRevList').append("<li>"+bookReviewsModel['booksList'][i]+"</li>");
+					
+					$('.bookRevList').append("<div>");
+					$('.bookRevList').append(bookReviewsModel['booksList'][i]);
+					$('.bookRevList').append("&nbsp; <a style='font-style:italic !important;' href='reviewsReviewBook'> Review this");				
+					$('.bookRevList').append("</a>");
+					$('.bookRevList').append("</div>");
 				}
 				
 				
